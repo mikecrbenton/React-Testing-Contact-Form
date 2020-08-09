@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const ContactForm = () => {
+    
   const [data, setData] = useState();
   const { register, errors, handleSubmit } = useForm({
     mode: "onBlur",
@@ -10,13 +11,17 @@ const ContactForm = () => {
     setData(data);
   };
 
+
   return (
     <div className="App">
+
       <form onSubmit={handleSubmit(onSubmit)}>
+
         <div>
           <label htmlFor="firstName">First Name*</label>
           <input
             name="firstName"
+            data-testid="first-name"
             placeholder="Edd"
             ref={register({ required: true, maxLength: 3 })}
           />
@@ -29,6 +34,7 @@ const ContactForm = () => {
           <label htmlFor="lastName">Last Name*</label>
           <input
             name="lastName"
+            data-testid="last-name"
             placeholder="Burke"
             ref={register({ required: true })}
           />
@@ -41,21 +47,28 @@ const ContactForm = () => {
           <label htmlFor="email" placeholder="bluebill1049@hotmail.com">
             Email*
           </label>
-          <input name="email" ref={register({ required: true })} />
+          <input 
+            name="email"
+            data-testid="email" 
+            ref={register({ required: true })} />
           {errors.email && (
             <p>Looks like there was an error: {errors.email.type}</p>
           )}
         </div>
+
         <div>
           <label htmlFor="message">Message</label>
-          <textarea name="message" ref={register({ required: false })} />
+          <textarea name="message" data-testid="text-area" ref={register({ required: false })} />
         </div>
+
         {data && (
           <pre style={{ textAlign: "left", color: "white" }}>
             {JSON.stringify(data, null, 2)}
           </pre>
         )}
+
         <input type="submit" />
+
       </form>
     </div>
   );
