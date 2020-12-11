@@ -7,6 +7,7 @@ const ContactForm = () => {
   const { register, errors, handleSubmit } = useForm({
     mode: "onBlur",
   });
+
   const onSubmit = (data) => {
     setData(data);
   };
@@ -26,7 +27,7 @@ const ContactForm = () => {
             ref={register({ required: true, maxLength: 3 })}
           />
           {errors.firstName && (
-            <p>Looks like there was an error: {errors.firstName.type}</p>
+            <p data-testid="firstname-error" >Looks like there was an error: {errors.firstName.type}</p>
           )}
         </div>
 
@@ -62,12 +63,12 @@ const ContactForm = () => {
         </div>
 
         {data && (
-          <pre style={{ textAlign: "left", color: "white" }}>
+          <pre data-testid="json-display" style={{ textAlign: "left", color: "white" }}>
             {JSON.stringify(data, null, 2)}
           </pre>
         )}
 
-        <input type="submit" />
+        <input data-testid="thisbutton" type="submit" />
 
       </form>
     </div>
